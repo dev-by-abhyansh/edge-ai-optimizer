@@ -1,6 +1,6 @@
 # Edge AI Optimizer: Synthetic Architect Dashboard 🧠⚡
 
-![UI Preview](frontend/public/UI.png) *(Note: Replace this path with the actual path to your UI screenshot if you added one to your repo!)*
+![UI Preview](frontend/public/UI.png) *(Note: Replace this path with the actual path to your UI screenshot if you added one!)*
 
 An end-to-end, full-stack application designed to benchmark and visualize the real-world trade-offs of deploying Convolutional Neural Networks on edge devices. 
 
@@ -21,7 +21,7 @@ edge-ai-optimizer/
 ├── backend/                  # Python/Flask API & PyTorch Inference Engine
 │   ├── app.py                # Main server script
 │   ├── requirements.txt      # Python dependencies
-│   └── saved_models/         # Directory for generated .pth weights (Empty by default)
+│   └── saved_models/         # Pre-trained .pth weights (FP32, FP16, INT8)
 │
 ├── frontend/                 # React/Vite UI Dashboard
 │   ├── src/                  # React components and styling
@@ -37,8 +37,6 @@ edge-ai-optimizer/
 └── README.md
 
 
-
-
 🛠️ Prerequisites
 To run this project locally, ensure you have the following installed:
 
@@ -46,22 +44,64 @@ Python 3.9+
 
 Node.js 18+ & npm
 
-Optional but recommended: A CUDA-enabled GPU for retraining the models.
-
 💻 Installation & Local Setup
 Step 1: Clone the Repository
 
 git clone [https://github.com/dev-by-abhyansh/edge-ai-optimizer.git](https://github.com/dev-by-abhyansh/edge-ai-optimizer.git)
 cd edge-ai-optimizer
 
-Step 2: Generate the Model Weights
-Because GitHub restricts files over 100MB, the compiled .pth model weights are not included in this repository. You must train/generate the models before running the backend.
+(Note: The pre-trained PyTorch weights for FP32, FP16, and INT8 are already included in the backend/saved_models/ directory, so you can run the dashboard immediately!)
 
-1. Navigate to the notebooks folder.
+### Step 2: Start the Backend (Flask + PyTorch)
+Open a terminal in the project root directory and set up the environment:
 
-2. Run 01_baseline.ipynb, 02_mixed_precision.ipynb, and 03_qat.ipynb sequentially.
+```bash
+# Create the environment
+conda create -p edge-ai python=3.9 -y
 
-3. Ensure the resulting .pth files are saved into the backend/saved_models/ directory.
+# Activate the environment
+conda activate ./edge-ai
 
-Step 3: Start the Backend (Flask + PyTorch)
-Open a terminal and set up your Python environment:
+# Navigate to the backend and install dependencies
+cd backend
+pip install -r requirements.txt
+
+# Start the server
+python app.py
+
+The Flask API will start running on http://127.0.0.1:5000.
+
+
+Step 3: Start the Frontend (React + Vite)
+Open a new terminal window (keep the backend running):
+
+Bash
+cd frontend
+
+# Install Node dependencies
+npm install
+
+# Start the Vite development server
+npm run dev
+
+
+The React dashboard will be available at http://localhost:5173.
+
+
+🧪 Methodology & Results
+This project was developed as part of a research initiative at the SRM Institute of Science and Technology.
+
+Our comparative analysis yielded the following conclusions:
+
+Memory: QAT successfully compressed the ResNet-18 model by 74.6%, strictly satisfying the constraints required for microcontroller deployment.
+
+Accuracy: Precision reduction did not destroy semantic understanding. The INT8 model achieved competitive accuracy (88.87%) compared to the FP32 baseline (86.23%).
+
+Generalization: FP16 Mixed Precision introduced beneficial computational noise during backpropagation, acting as an implicit regularizer that prevented the network from overfitting to training artifacts.
+
+👨‍💻 Authors
+Kunwar Abhyansh Visen * Sarthak Bhardwaj * Kaustav Roy* Manchineella Suryanarayana
+
+Manchineella Suryanarayana
+
+Under the guidance of: Dr. Prince Chelladurai S, Dept. of Computational Intelligence, SRM Institute of Science and Technology.
