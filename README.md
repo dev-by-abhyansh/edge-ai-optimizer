@@ -1,4 +1,4 @@
-# Edge AI Optimizer: Synthetic Architect Dashboard 🧠⚡
+# Edge AI Optimizer: Synthetic Architect Dashboard 
 
 ![UI Preview](frontend/public/UI.png) *(Note: Replace this path with the actual path to your UI screenshot if you added one!)*
 
