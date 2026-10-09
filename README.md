@@ -1,7 +1,5 @@
 # Edge AI Optimizer: Synthetic Architect Dashboard 
 
-![UI Preview](frontend/public/UI.png) *(Note: Replace this path with the actual path to your UI screenshot if you added one!)*
-
 An end-to-end, full-stack application designed to benchmark and visualize the real-world trade-offs of deploying Convolutional Neural Networks on edge devices. 
 
 This project evaluates a **ResNet-18** architecture trained on **CIFAR-10**, comparing standard 32-bit floating-point (FP32) inference against **Mixed Precision (FP16)** and **Quantization-Aware Training (INT8)**. The custom "Synthetic Architect" dashboard provides real-time analytics on inference latency, confidence distribution, and memory footprint.
